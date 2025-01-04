@@ -17,5 +17,7 @@
     <string name="yes">כן</string>
     <string name="movie_deleted">הסרט נמחק</string>
     <string name="no">לא</string>
+    <string name="title_required">נדרשת כותרת</string>
+    <string name="description_required">נדרש תיאור</string>
 
 </resources>

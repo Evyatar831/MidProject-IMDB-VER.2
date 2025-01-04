@@ -16,4 +16,6 @@
     <string name="yes">Yes</string>
     <string name="movie_deleted">Movie deleted</string>
     <string name="no">No</string>
+    <string name="title_required">Title is required</string>
+    <string name="description_required">Description is required</string>
 </resources>
