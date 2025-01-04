@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.midproject_imdb.data.models.Movie
 import com.example.midproject_imdb.data.repositories.MovieRepository
@@ -16,7 +17,13 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     private val _chosenItem = MutableLiveData<Movie?>()
     val chosenItem: LiveData<Movie?> = _chosenItem
 
-    val movies : LiveData<List<Movie>>? = repository.getMovies()
+    // Modify the movies LiveData to sort by title
+    val movies: LiveData<List<Movie>>? = repository.getMovies()?.map { list ->
+        list.sortedBy { it.title }
+    }
+
+
+
 
     fun addMovie(movie: Movie) {
         viewModelScope.launch{
@@ -42,8 +49,11 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
         _chosenItem.value=movie}
     }
-    val allMovies: LiveData<List<Movie>>? = repository.allMovies
 
+    // Modify allMovies to sort by title
+    val allMovies: LiveData<List<Movie>>? = repository.allMovies?.map { list ->
+        list.sortedBy { it.title }
+    }
     fun preloadMovies() {
 
         allMovies?.observeForever { movies ->
