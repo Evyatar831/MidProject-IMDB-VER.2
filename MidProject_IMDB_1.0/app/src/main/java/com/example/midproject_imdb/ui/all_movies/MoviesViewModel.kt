@@ -17,12 +17,7 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     private val _chosenItem = MutableLiveData<Movie?>()
     val chosenItem: LiveData<Movie?> = _chosenItem
 
-    // Modify the movies LiveData to sort by title
-    val movies: LiveData<List<Movie>>? = repository.getMovies()?.map { list ->
-        list.sortedBy { it.title }
-    }
-
-
+       val movies: LiveData<List<Movie>>? = repository.getMovies()
 
 
     fun addMovie(movie: Movie) {
@@ -50,10 +45,11 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         _chosenItem.value=movie}
     }
 
-    // Modify allMovies to sort by title
-    val allMovies: LiveData<List<Movie>>? = repository.allMovies?.map { list ->
-        list.sortedBy { it.title }
-    }
+    val allMovies: LiveData<List<Movie>>? = repository.allMovies
+
+
+
+
     fun preloadMovies() {
 
         allMovies?.observeForever { movies ->
