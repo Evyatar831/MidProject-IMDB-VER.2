@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mid Project - IMDB</string>
+        <string name="enter_item_title">הזן כותרת לסרט</string>
+        <string name="enter_item_description">הזן תיאור לסרט</string>
+        <string name="pick_image">בחר תמונה</string>
+        <string name="finish">סיום</string>
+        <string name="main_item_title">כותרת פריט ראשי</string>
+        <string name="delete_all">מחק הכל</string>
+    <string name="selected_image">תמונה שנבחרה</string>
+    <string name="add_a_movie">הוסף סרט</string>
+    <string name="movie_image">תמונת הסרט הנבחר</string>
+    <string name="item_detailed_description">פירוט מורחב על הסרט</string>
+    <string name="add_user_comments">הוסף את ההערות שלך כאן</string>
+    <string name="delete_movie">מחק סרט</string>
+    <string name="are_you_sure_you_want_to_delete_this_movie">האם אתה בטוח שברצונך למחוק את הסרט הזה?</string>
+    <string name="yes">כן</string>
+    <string name="movie_deleted">הסרט נמחק</string>
+    <string name="no">לא</string>
+
+</resources>
