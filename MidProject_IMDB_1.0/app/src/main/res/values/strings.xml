@@ -18,4 +18,6 @@
     <string name="no">No</string>
     <string name="title_required">Title is required</string>
     <string name="description_required">Description is required</string>
+    <string name="description">Description</string>
+    <string name="notes">Notes</string>
 </resources>
