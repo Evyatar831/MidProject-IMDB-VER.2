@@ -4,6 +4,14 @@
     <selectionStates>
       <SelectionState runConfigName="Mid_Project_-_IMDB.app">
         <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-01-07T08:54:50.636490400Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=hqaupnq4jrvwjvkb" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
     </selectionStates>
   </component>
