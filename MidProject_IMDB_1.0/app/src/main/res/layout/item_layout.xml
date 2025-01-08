@@ -36,7 +36,6 @@
                 android:textStyle="bold"
                 android:id="@+id/item_title"/>
 
-
         </LinearLayout>
     </LinearLayout>
 

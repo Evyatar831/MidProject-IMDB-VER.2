@@ -12,7 +12,6 @@
         android:padding="32dp"
         android:background="@android:color/white">
 
-        <!-- Input Fields Container -->
         <LinearLayout
             android:id="@+id/input_container"
             android:layout_width="0dp"
@@ -91,7 +90,6 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <!-- Image and Buttons Container -->
         <LinearLayout
             android:id="@+id/image_container"
             android:layout_width="253dp"

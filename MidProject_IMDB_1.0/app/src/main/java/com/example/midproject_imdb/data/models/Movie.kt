@@ -18,8 +18,7 @@ data class Movie(
 
     @ColumnInfo(name = "user_comments")
     val userComments: String? = null)
-            {
-
-    @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
-}
+    {
+        @PrimaryKey(autoGenerate = true)
+        var id : Int = 0
+    }

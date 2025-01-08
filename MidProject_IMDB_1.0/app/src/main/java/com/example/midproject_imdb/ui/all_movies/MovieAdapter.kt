@@ -10,11 +10,11 @@ import com.example.midproject_imdb.data.models.Movie
 
 class MovieAdapter(val movies:List<Movie>, val callback: MovieListener)
     : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
-    interface MovieListener {
+
+        interface MovieListener {
         fun onItemClicked(index:Int)
         fun onItemLongClicked(index:Int)
     }
-
 
     inner class MovieViewHolder(private val binding: ItemLayoutBinding)
         : RecyclerView.ViewHolder(binding.root), View.OnClickListener, View.OnLongClickListener {

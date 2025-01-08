@@ -26,9 +26,6 @@ interface MovieDao {
     @Update
     suspend fun updateMovie(movie: Movie)
 
-    @Query("DELETE FROM movies")
-    suspend fun deleteAll()
-
     @Query("SELECT * FROM movies ORDER BY title ASC")
     fun getMovies(): LiveData<List<Movie>>
 
