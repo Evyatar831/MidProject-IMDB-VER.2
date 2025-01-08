@@ -40,20 +40,7 @@
                 android:layout_marginBottom="8dp"
                 android:id="@+id/item_title" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/item_description"
-                android:text="@string/item_detailed_description" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:id="@+id/user_comments"
-                android:text="@string/item_detailed_description"
-                android:layout_marginTop="6dp"/>
+
         </LinearLayout>
     </LinearLayout>
 
