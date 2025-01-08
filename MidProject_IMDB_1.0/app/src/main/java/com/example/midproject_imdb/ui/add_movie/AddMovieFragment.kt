@@ -60,8 +60,7 @@ class AddMovieFragment : Fragment() {
     private fun setupObservers() {
         viewModel.chosenItem.observe(viewLifecycleOwner) { movie ->
             if (movie != null && viewModel.currentTitle.value == null) {
-                isEditMode = true
-                EditMovie = movie.id
+                viewModel.setEditMode(true, movie.id)
                 viewModel.setCurrentValues(
                     movie.title,
                     movie.description,
@@ -71,6 +70,16 @@ class AddMovieFragment : Fragment() {
                 viewModel.setShowComments(true)  // Set the visibility state
             }
         }
+
+
+
+        viewModel.isEditMode.observe(viewLifecycleOwner) { isEdit ->
+            isEditMode = isEdit
+        }
+        viewModel.editMovieId.observe(viewLifecycleOwner) { id ->
+            EditMovie = id
+        }
+
 
         // observer for comments visibility
         viewModel.showComments.observe(viewLifecycleOwner) { show ->

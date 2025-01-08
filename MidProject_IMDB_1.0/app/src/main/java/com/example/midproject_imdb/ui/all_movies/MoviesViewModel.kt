@@ -106,6 +106,8 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         _currentUserComments.value = null
         _currentImageUri.value = null
         _showComments.value = false  // Reset the visibility state
+        _isEditMode.value = false
+        _editMovieId.value = 0
 
     }
 
@@ -132,6 +134,19 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
 
     fun setShowComments(show: Boolean) {
         _showComments.value = show
+    }
+
+
+//edit mode state in the ViewModel
+    private val _isEditMode = MutableLiveData<Boolean>()
+    val isEditMode: LiveData<Boolean> = _isEditMode
+
+    private val _editMovieId = MutableLiveData<Int>()
+    val editMovieId: LiveData<Int> = _editMovieId
+
+    fun setEditMode(isEdit: Boolean, movieId: Int = 0) {
+        _isEditMode.value = isEdit
+        _editMovieId.value = movieId
     }
 
 
