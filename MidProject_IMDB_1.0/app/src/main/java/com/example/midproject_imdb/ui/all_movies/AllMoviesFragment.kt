@@ -30,7 +30,6 @@ class AllMoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         _binding = AllItemsLayoutBinding.inflate(inflater,container,false)
 
         binding.fab.setOnClickListener {
