@@ -31,8 +31,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         repository.updateMovie(movie)}
     }
 
-    fun getMovie(id:Int) = repository.getMovie(id)
-
     fun setMovie(movie: Movie?){
         viewModelScope.launch {
         _chosenItem.value=movie}
