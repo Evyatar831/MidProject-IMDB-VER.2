@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="Mid_Project_-_IMDB.app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-01-07T08:54:50.636490400Z">
+        <DropdownSelection timestamp="2025-01-07T09:29:33.062912400Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=hqaupnq4jrvwjvkb" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\evyatar\.android\avd\Medium_Phone.avd" />
             </handle>
           </Target>
         </DropdownSelection>

@@ -34,8 +34,6 @@ class MovieAdapter(val movies:List<Movie>, val callback: MovieListener)
 
         fun bind(movie: Movie) {
             binding.itemTitle.text = movie.title
-            binding.itemDescription.text = movie.description
-            binding.userComments.text=movie.userComments
             Glide.with(binding.root).load(movie.photo).circleCrop()
                 .into(binding.itemImage)
         }

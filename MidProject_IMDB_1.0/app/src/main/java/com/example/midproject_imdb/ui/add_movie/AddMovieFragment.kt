@@ -31,12 +31,14 @@ class AddMovieFragment : Fragment() {
     val pickImageLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             binding.resultImage.setImageURI(it)
-            if (it != null)
+            if (it != null) {
                 requireActivity().contentResolver.takePersistableUriPermission(
                     it,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION
                 )
-            imageUri = it
+                imageUri = it
+                viewModel.updateCurrentImageUri(it.toString())
+            }
         }
 
     @SuppressLint("SuspiciousIndentation")
@@ -48,27 +50,55 @@ class AddMovieFragment : Fragment() {
         _binding = AddItemLayoutBinding.inflate(inflater, container, false)
 
         setupTextValidation()
+        setupObservers()
+        setupClickListeners()
+        validateInputs()
 
+        return binding.root
+    }
+
+    private fun setupObservers() {
         viewModel.chosenItem.observe(viewLifecycleOwner) { movie ->
-            if (movie != null) {
+            if (movie != null && viewModel.currentTitle.value == null) {
                 isEditMode = true
                 EditMovie = movie.id
-                binding.itemTitle.setText(movie.title)
-                binding.itemDescription.setText(movie.description)
-                imageUri = Uri.parse(movie.photo)
-                binding.resultImage.setImageURI(imageUri)
+                viewModel.setCurrentValues(
+                    movie.title,
+                    movie.description,
+                    movie.userComments,
+                    movie.photo
+                )
                 binding.userCommentsLayout.visibility = View.VISIBLE
-                binding.userComments.setText(movie.userComments)
-                validateInputs()
-            } else {
-                isEditMode = false
-                binding.itemTitle.text = null
-                binding.itemDescription.text = null
-                binding.resultImage.setImageDrawable(null)
-                validateInputs()
             }
         }
 
+        viewModel.currentTitle.observe(viewLifecycleOwner) { title ->
+            if (binding.itemTitle.text.toString() != title) {
+                binding.itemTitle.setText(title)
+            }
+        }
+
+        viewModel.currentDescription.observe(viewLifecycleOwner) { description ->
+            if (binding.itemDescription.text.toString() != description) {
+                binding.itemDescription.setText(description)
+            }
+        }
+
+        viewModel.currentUserComments.observe(viewLifecycleOwner) { comments ->
+            if (binding.userComments.text.toString() != comments) {
+                binding.userComments.setText(comments)
+            }
+        }
+
+        viewModel.currentImageUri.observe(viewLifecycleOwner) { uri ->
+            if (uri != null) {
+                imageUri = Uri.parse(uri)
+                binding.resultImage.setImageURI(imageUri)
+            }
+        }
+    }
+
+    private fun setupClickListeners() {
         binding.finishBtn.setOnClickListener {
             if (isInputValid()) {
                 if (isEditMode) {
@@ -88,6 +118,7 @@ class AddMovieFragment : Fragment() {
                     )
                     viewModel.addMovie(item)
                 }
+                viewModel.clearCurrentValues()
                 findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
             }
         }
@@ -95,9 +126,6 @@ class AddMovieFragment : Fragment() {
         binding.imageBtn.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
-
-        validateInputs()
-        return binding.root
     }
 
     private fun setupTextValidation() {
@@ -105,6 +133,7 @@ class AddMovieFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
+                s?.toString()?.let { viewModel.updateCurrentTitle(it) }
                 validateInputs()
             }
         })
@@ -113,7 +142,16 @@ class AddMovieFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
+                s?.toString()?.let { viewModel.updateCurrentDescription(it) }
                 validateInputs()
+            }
+        })
+
+        binding.userComments.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                s?.toString()?.let { viewModel.updateCurrentUserComments(it) }
             }
         })
     }
@@ -141,12 +179,11 @@ class AddMovieFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
+        if (!requireActivity().isChangingConfigurations) {
+            viewModel.clearCurrentValues()
+        }
         _binding = null
     }
 }

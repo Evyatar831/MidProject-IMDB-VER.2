@@ -67,7 +67,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-
     // delete dialog handle
     private val _showDeleteDialog = MutableLiveData<Pair<Movie?, Int>?>()
     val showDeleteDialog: LiveData<Pair<Movie?, Int>?> = _showDeleteDialog
@@ -76,6 +75,52 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     }
     fun clearDeleteDialog() {
         _showDeleteDialog.value = null
+    }
+
+
+
+  //handling configuration changes in creation and editing
+
+    private val _currentTitle = MutableLiveData<String?>()
+    val currentTitle: MutableLiveData<String?> = _currentTitle
+
+    private val _currentDescription = MutableLiveData<String?>()
+    val currentDescription: MutableLiveData<String?> = _currentDescription
+
+    private val _currentUserComments = MutableLiveData<String?>()
+    val currentUserComments: MutableLiveData<String?> = _currentUserComments
+
+    private val _currentImageUri = MutableLiveData<String?>()
+    val currentImageUri: MutableLiveData<String?> = _currentImageUri
+
+    fun setCurrentValues(title: String?, description: String?, comments: String?, imageUri: String?) {
+        _currentTitle.value = title
+        _currentDescription.value = description
+        _currentUserComments.value = comments
+        _currentImageUri.value = imageUri
+    }
+
+    fun clearCurrentValues() {
+        _currentTitle.value = null
+        _currentDescription.value = null
+        _currentUserComments.value = null
+        _currentImageUri.value = null
+    }
+
+    fun updateCurrentTitle(title: String) {
+        _currentTitle.value = title
+    }
+
+    fun updateCurrentDescription(description: String) {
+        _currentDescription.value = description
+    }
+
+    fun updateCurrentUserComments(comments: String) {
+        _currentUserComments.value = comments
+    }
+
+    fun updateCurrentImageUri(uri: String) {
+        _currentImageUri.value = uri
     }
 
 
