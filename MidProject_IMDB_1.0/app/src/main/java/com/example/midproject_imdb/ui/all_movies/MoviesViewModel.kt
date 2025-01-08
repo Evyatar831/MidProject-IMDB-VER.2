@@ -105,6 +105,8 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         _currentDescription.value = null
         _currentUserComments.value = null
         _currentImageUri.value = null
+        _showComments.value = false  // Reset the visibility state
+
     }
 
     fun updateCurrentTitle(title: String) {
@@ -121,6 +123,15 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
 
     fun updateCurrentImageUri(uri: String) {
         _currentImageUri.value = uri
+    }
+
+    // handled comments visibility  in edit mode
+
+    private val _showComments = MutableLiveData<Boolean>()
+    val showComments: LiveData<Boolean> = _showComments
+
+    fun setShowComments(show: Boolean) {
+        _showComments.value = show
     }
 
 

@@ -68,9 +68,15 @@ class AddMovieFragment : Fragment() {
                     movie.userComments,
                     movie.photo
                 )
-                binding.userCommentsLayout.visibility = View.VISIBLE
+                viewModel.setShowComments(true)  // Set the visibility state
             }
         }
+
+        // observer for comments visibility
+        viewModel.showComments.observe(viewLifecycleOwner) { show ->
+            binding.userCommentsLayout.visibility = if (show) View.VISIBLE else View.GONE
+        }
+
 
         viewModel.currentTitle.observe(viewLifecycleOwner) { title ->
             if (binding.itemTitle.text.toString() != title) {
