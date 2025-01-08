@@ -30,7 +30,6 @@ class AllMoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         _binding = AllItemsLayoutBinding.inflate(inflater,container,false)
 
         binding.fab.setOnClickListener {
@@ -55,7 +54,6 @@ class AllMoviesFragment : Fragment() {
             }
         }
 
-
         viewModel.movies?.observe(viewLifecycleOwner) {
             binding.recycler.adapter = MovieAdapter(it, object : MovieAdapter.MovieListener  {
 
@@ -73,11 +71,6 @@ class AllMoviesFragment : Fragment() {
             binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)
 
         }
-
-
-
-
-
 
         ItemTouchHelper(object : ItemTouchHelper.Callback() {
 
@@ -132,7 +125,6 @@ class AllMoviesFragment : Fragment() {
 
             builder.create().show()
         }
-
 
         override fun onDestroyView() {
         super.onDestroyView()

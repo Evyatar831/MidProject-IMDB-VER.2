@@ -31,12 +31,7 @@ class MovieRepository(application: Application) {
 
     fun getMovie(id:Int)  = movieDao?.getMovie(id)
 
-    suspend fun deleteAll() {
-        movieDao?.deleteAll()
-    }
-
     suspend fun insertMovies(movies: List<Movie>) {
         movieDao?.insertMovies(movies)
     }
-
 }

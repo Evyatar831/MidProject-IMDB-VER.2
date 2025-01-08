@@ -19,7 +19,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
 
        val movies: LiveData<List<Movie>>? = repository.getMovies()
 
-
     fun addMovie(movie: Movie) {
         viewModelScope.launch{
         repository.addMovie(movie)}
@@ -29,10 +28,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch { repository.deleteMovie(movie)}
     }
 
-    fun deleteAll() {
-        viewModelScope.launch {
-        repository.deleteAll()}
-    }
     fun updateMovie(movie: Movie) {
         viewModelScope.launch {
         repository.updateMovie(movie)}
@@ -76,8 +71,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     fun clearDeleteDialog() {
         _showDeleteDialog.value = null
     }
-
-
 
   //handling configuration changes in creation and editing
 
@@ -136,8 +129,8 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         _showComments.value = show
     }
 
+    //edit mode state in the ViewModel
 
-//edit mode state in the ViewModel
     private val _isEditMode = MutableLiveData<Boolean>()
     val isEditMode: LiveData<Boolean> = _isEditMode
 

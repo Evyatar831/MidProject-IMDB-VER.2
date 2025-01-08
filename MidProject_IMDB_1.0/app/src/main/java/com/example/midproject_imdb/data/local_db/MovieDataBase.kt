@@ -23,8 +23,6 @@ abstract class MovieDataBase : RoomDatabase() {
                     context.applicationContext,
                     MovieDataBase::class.java,
                     "items_db")
-//                ).allowMainThreadQueries()
-
                     .build()
             }
 
