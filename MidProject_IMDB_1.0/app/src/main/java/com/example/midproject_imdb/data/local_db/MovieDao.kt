@@ -29,8 +29,8 @@ interface MovieDao {
     @Query("DELETE FROM movies")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM movies ORDER BY content_desc ASC")
-    fun getMovies() : LiveData<List<Movie>>
+    @Query("SELECT * FROM movies ORDER BY title ASC")
+    fun getMovies(): LiveData<List<Movie>>
 
     @Query("SELECT * FROM movies WHERE id =:id")
      fun getMovie(id: Int): LiveData<Movie>

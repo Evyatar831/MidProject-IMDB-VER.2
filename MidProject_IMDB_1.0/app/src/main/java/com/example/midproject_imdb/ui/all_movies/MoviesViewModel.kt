@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.midproject_imdb.data.models.Movie
 import com.example.midproject_imdb.data.repositories.MovieRepository
@@ -16,7 +17,8 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     private val _chosenItem = MutableLiveData<Movie?>()
     val chosenItem: LiveData<Movie?> = _chosenItem
 
-    val movies : LiveData<List<Movie>>? = repository.getMovies()
+       val movies: LiveData<List<Movie>>? = repository.getMovies()
+
 
     fun addMovie(movie: Movie) {
         viewModelScope.launch{
@@ -42,7 +44,11 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
         _chosenItem.value=movie}
     }
+
     val allMovies: LiveData<List<Movie>>? = repository.allMovies
+
+
+
 
     fun preloadMovies() {
 
@@ -61,7 +67,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-
     // delete dialog handle
     private val _showDeleteDialog = MutableLiveData<Pair<Movie?, Int>?>()
     val showDeleteDialog: LiveData<Pair<Movie?, Int>?> = _showDeleteDialog
@@ -70,6 +75,78 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
     }
     fun clearDeleteDialog() {
         _showDeleteDialog.value = null
+    }
+
+
+
+  //handling configuration changes in creation and editing
+
+    private val _currentTitle = MutableLiveData<String?>()
+    val currentTitle: MutableLiveData<String?> = _currentTitle
+
+    private val _currentDescription = MutableLiveData<String?>()
+    val currentDescription: MutableLiveData<String?> = _currentDescription
+
+    private val _currentUserComments = MutableLiveData<String?>()
+    val currentUserComments: MutableLiveData<String?> = _currentUserComments
+
+    private val _currentImageUri = MutableLiveData<String?>()
+    val currentImageUri: MutableLiveData<String?> = _currentImageUri
+
+    fun setCurrentValues(title: String?, description: String?, comments: String?, imageUri: String?) {
+        _currentTitle.value = title
+        _currentDescription.value = description
+        _currentUserComments.value = comments
+        _currentImageUri.value = imageUri
+    }
+
+    fun clearCurrentValues() {
+        _currentTitle.value = null
+        _currentDescription.value = null
+        _currentUserComments.value = null
+        _currentImageUri.value = null
+        _showComments.value = false  // Reset the visibility state
+        _isEditMode.value = false
+        _editMovieId.value = 0
+
+    }
+
+    fun updateCurrentTitle(title: String) {
+        _currentTitle.value = title
+    }
+
+    fun updateCurrentDescription(description: String) {
+        _currentDescription.value = description
+    }
+
+    fun updateCurrentUserComments(comments: String) {
+        _currentUserComments.value = comments
+    }
+
+    fun updateCurrentImageUri(uri: String) {
+        _currentImageUri.value = uri
+    }
+
+    // handled comments visibility  in edit mode
+
+    private val _showComments = MutableLiveData<Boolean>()
+    val showComments: LiveData<Boolean> = _showComments
+
+    fun setShowComments(show: Boolean) {
+        _showComments.value = show
+    }
+
+
+//edit mode state in the ViewModel
+    private val _isEditMode = MutableLiveData<Boolean>()
+    val isEditMode: LiveData<Boolean> = _isEditMode
+
+    private val _editMovieId = MutableLiveData<Int>()
+    val editMovieId: LiveData<Int> = _editMovieId
+
+    fun setEditMode(isEdit: Boolean, movieId: Int = 0) {
+        _isEditMode.value = isEdit
+        _editMovieId.value = movieId
     }
 
 
