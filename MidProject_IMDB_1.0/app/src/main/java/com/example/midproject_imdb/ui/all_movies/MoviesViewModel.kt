@@ -1,11 +1,9 @@
 package com.example.midproject_imdb.ui.all_movies
 
 import android.app.Application
-import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.midproject_imdb.data.models.Movie
 import com.example.midproject_imdb.data.repositories.MovieRepository
@@ -32,8 +30,6 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
         repository.updateMovie(movie)}
     }
-
-    fun getMovie(id:Int) = repository.getMovie(id)
 
     fun setMovie(movie: Movie?){
         viewModelScope.launch {

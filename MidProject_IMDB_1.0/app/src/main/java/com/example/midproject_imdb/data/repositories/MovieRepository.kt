@@ -29,8 +29,6 @@ class MovieRepository(application: Application) {
         movieDao?.deleteMovie(movie)
     }
 
-    fun getMovie(id:Int)  = movieDao?.getMovie(id)
-
     suspend fun insertMovies(movies: List<Movie>) {
         movieDao?.insertMovies(movies)
     }
